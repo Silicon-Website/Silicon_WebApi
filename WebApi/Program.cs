@@ -7,7 +7,7 @@ builder.Services.AddSwaggerGen();
 
 
 
-builder.Services.AddDbContext<ApiContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("WebApi_Database")));
+builder.Services.AddDbContext<ApiContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
 
