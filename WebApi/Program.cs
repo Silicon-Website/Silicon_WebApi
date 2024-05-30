@@ -1,9 +1,25 @@
 using Infrastructure.Contexts;
+using Infrastructure.GraphQL;
+using Infrastructure.GraphQL.Mutations;
+using Infrastructure.GraphQL.ObjectTypes;
 using Microsoft.EntityFrameworkCore;
+using WebApi.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
+
+var host = new HostBuilder()
+    .ConfigureServices(services =>
+    {
+        services.AddGraphQL()
+                .AddQueryType<Query>()
+                .AddMutationType<CourseMutation>()
+                .AddType<CourseType>();
+
+        services.AddScoped<ICourseService, CourseService>();
+    })
+    .Build();
 
 
 
