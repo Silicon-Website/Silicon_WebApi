@@ -1,10 +1,15 @@
-﻿using Infrastructure.Entities;
+﻿using Data.Entities;
+using Infrastructure.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace Infrastructure.Contexts;
 
-public class ApiContext(DbContextOptions options) : DbContext(options)
+public class ApiContext(DbContextOptions<ApiContext> options) :
+ IdentityDbContext<ApplicationUser>(options)
 {
     public DbSet<SubscribersEntity> Subscribers { get; set; }
     public DbSet<CourseEntity> Courses { get; set; }
+    public DbSet<AddressEntity> Addresses { get; set; }
 }

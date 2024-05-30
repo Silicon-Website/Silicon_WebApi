@@ -31,7 +31,7 @@ namespace WebApi.Controllers
         }
 
 
-        [HttpDelete]
+        [HttpDelete("{email}")]
         public async Task<IActionResult> Unsubscribe(string email)
         {
             if (ModelState.IsValid)

@@ -65,7 +65,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.SubscribersEntity", b =>
@@ -93,7 +93,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Email");
 
-                    b.ToTable("Subscribers");
+                    b.ToTable("Subscribers", (string)null);
                 });
 #pragma warning restore 612, 618
         }
