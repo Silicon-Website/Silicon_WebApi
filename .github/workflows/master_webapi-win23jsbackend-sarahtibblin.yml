@@ -54,4 +54,4 @@ jobs:
           app-name: 'webapi-win23jsbackend-sarahtibblin'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_50CD8C0F25474131BAE45182F4F5D6CC }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E5C4DCA8072C41488ACBBAF8EA65F257 }}
