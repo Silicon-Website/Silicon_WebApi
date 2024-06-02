@@ -6,16 +6,9 @@ using Microsoft.Extensions.Options;
 
 namespace Infrastructure.Contexts;
 
-public class ApiContext(DbContextOptions<ApiContext> options) : DbContext(options)
+public class ApiContext(DbContextOptions<ApiContext> options) : IdentityDbContext<ApplicationUser>(options)
 {
-    public DbSet<SubscribersEntity> Subscribers { get; set; }
-    public DbSet<UserEntity> Users { get; set; }
     public DbSet<AddressEntity> Addresses { get; set; }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseLazyLoadingProxies();
-        }
-    }
+
+    public DbSet<SubscribersEntity> Subscribers { get; set; }
 }
