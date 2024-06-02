@@ -12,6 +12,34 @@ namespace WebApi.Controllers
 
         private readonly ApiContext _context = context;
 
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var subscribers = await _context.Subscribers.ToListAsync();
+            if (subscribers == null || !subscribers.Any())
+            {
+                return NotFound();
+            }
+            return Ok(subscribers);
+        }
+
+        [HttpGet("{email}")]
+        public async Task<IActionResult> GetOne(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return BadRequest("Email is required");
+            }
+
+            var subscriber = await _context.Subscribers.FirstOrDefaultAsync(x => x.Email == email);
+            if (subscriber == null)
+            {
+                return NotFound();
+            }
+            return Ok(subscriber);
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> Subscribe(SubscribersEntity entity)
         {
