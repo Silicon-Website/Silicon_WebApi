@@ -1,38 +1,30 @@
 using Infrastructure.Contexts;
-using Infrastructure.GraphQL;
-using Infrastructure.GraphQL.Mutations;
-using Infrastructure.GraphQL.ObjectTypes;
 using Microsoft.EntityFrameworkCore;
-using WebApi.Interfaces;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
-builder.Services.AddSwaggerGen();
-
-var host = new HostBuilder()
-    .ConfigureServices(services =>
-    {
-        services.AddGraphQL()
-                .AddQueryType<Query>()
-                .AddMutationType<CourseMutation>()
-                .AddType<CourseType>();
-
-        services.AddScoped<ICourseService, CourseService>();
-    })
-    .Build();
-
-
 
 builder.Services.AddDbContext<ApiContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddAuthorization();
 
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+});
 
-
-
+builder.Services.AddControllers();
 
 var app = builder.Build();
-app.UseSwagger();
-app.UseSwaggerUI();
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API");
+});
+
 app.MapControllers();
+
 app.Run();

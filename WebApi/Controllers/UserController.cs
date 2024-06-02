@@ -24,7 +24,7 @@ namespace WebApi.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(string id, ApplicationUser user)
+        public async Task<IActionResult> UpdateUser(string id, UserEntity user)
         {
             if (id != user.Id)
             {
