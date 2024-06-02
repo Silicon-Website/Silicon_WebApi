@@ -4,9 +4,9 @@ namespace Data.Entities;
 
 public class ApplicationUser :IdentityUser
 {
-    public string FirstName { get; set; } = null!;
-    public string LastName { get; set; } = null!;
-    public string? Bio { get; set; } = null!;
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+    public string? Bio { get; set; }
     public string? ProfileImage { get; set; } = "avatar.jpg";
     public int? AddressId { get; set; }
     public AddressEntity? Address { get; set; }
